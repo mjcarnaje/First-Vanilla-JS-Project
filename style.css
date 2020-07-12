@@ -16,9 +16,9 @@ header {
 	height: 100vh;
 	width: 100%;
 
-	background-image: linear-gradient(to right bottom, rgba(246, 138, 126, 0.4), rgba(7, 32, 72, 0.4)),
-		url(white-and-black-mountain-wallpaper-933054.jpg);
-	background-position: center;
+	background-color: #112445;
+	background-image: url(/header-bg.png);
+	background-position: bottom;
 	background-size: cover;
 
 	display: flex;
@@ -202,4 +202,117 @@ header {
 	cursor: pointer;
 
 	background: linear-gradient(to bottom, #b67c80 0%, #1d3769 100%);
+}
+
+/* SECTION*/
+.section {
+	background-color: #112445;
+	width: 100%;
+	display: grid;
+	grid-template-columns:
+		[full-start] minmax(6rem, 1fr)
+		[center-start] repeat(8, [col-start] minmax(min-content, 14rem) [col-end])
+		[center-end] minmax(6rem, 1fr)
+		[full-end];
+
+	grid-column-gap: 1.6rem;
+	padding: 5rem 0;
+}
+
+.member-container {
+	grid-column: center-start / center-end;
+
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(min-content, 38rem));
+	grid-gap: 1.6rem;
+}
+
+.container {
+	background-color: white;
+	height: 21.3rem;
+	max-width: 100%;
+	padding: 1.5rem 2rem 2rem 2rem;
+
+	display: grid;
+	grid-template-rows: 2.5fr repeat(3, 1fr);
+}
+.hdr {
+	display: flex;
+	align-items: center;
+}
+.margin-right {
+	margin-left: 2rem;
+}
+.description-container {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+
+	justify-self: center;
+}
+
+.first-container {
+	margin-top: 3.5rem;
+	display: flex;
+	justify-content: space-between;
+}
+.second-container {
+}
+.third-container {
+}
+
+.padding-for-container {
+	padding: 0 4rem;
+}
+
+.heading-3 {
+	font-family: 'Montserrat', sans-serif;
+	font-size: 1.4rem;
+	text-transform: uppercase;
+	font-weight: 600;
+	color: white;
+}
+
+.heading-3::after {
+	display: block;
+	height: 2px;
+	background-color: white;
+	content: '';
+	width: 85%;
+	margin: 0 auto;
+	margin-top: 5px;
+}
+.white {
+	color: white;
+}
+
+.heading-4 {
+	font-family: 'Poppins', sans-serif;
+	font-size: 1.1rem;
+	font-weight: 200;
+}
+
+.heading-5 {
+	font-family: 'Poppins', sans-serif;
+	font-size: 0.8rem;
+	font-weight: bold;
+	text-transform: uppercase;
+}
+.span {
+	font-weight: 700;
+}
+img {
+	height: 6rem;
+	width: 6rem;
+	margin-left: 1rem;
+}
+.male-container {
+	background-image: url(/svg/male-bg.svg);
+	background-repeat: no-repeat;
+	background-size: contain;
+}
+.female-container {
+	background-image: url(/svg/female-bg.svg);
+	background-repeat: no-repeat;
+	background-size: contain;
 }
