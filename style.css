@@ -1,0 +1,204 @@
+*,
+*::after,
+*::before {
+	margin: 0;
+	padding: 0;
+	box-sizing: inherit;
+}
+
+html {
+	font-size: 62.5%;
+	box-sizing: border-box;
+	color: #333333;
+}
+
+header {
+	height: 100vh;
+	width: 100%;
+
+	background-image: linear-gradient(to right bottom, rgba(246, 138, 126, 0.4), rgba(7, 32, 72, 0.4)),
+		url(white-and-black-mountain-wallpaper-933054.jpg);
+	background-position: center;
+	background-size: cover;
+
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+.form-container {
+	background-color: white;
+	height: 60rem;
+	width: 49rem;
+	border-radius: 9px;
+	padding: 5.9rem 5.2rem 4rem 5.2rem;
+
+	display: grid;
+	grid-template-columns: repeat(2, 1fr);
+	grid-template-rows: repeat(2, min-content) 1fr;
+	grid-column-gap: 1.6rem;
+}
+
+.heading-1__signup {
+	grid-column: 1 / 3;
+}
+.heading-2__line {
+	grid-column: 1 / 3;
+}
+/* center grid */
+.grid-1-3 {
+	grid-column: 1 /3;
+}
+.center {
+	align-items: center;
+}
+
+/* FORMS */
+
+.form {
+	grid-column: 1 / 3;
+
+	display: grid;
+	grid-template-columns: repeat(2, 1fr);
+	grid-column-gap: 1.6rem;
+	padding-top: 4rem;
+}
+
+.form__group {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+}
+
+.form__label {
+	font-family: 'MADE Bon Voyage';
+	font-size: 1.2rem;
+	margin-left: 0.5rem;
+	margin-top: 0.3rem;
+	display: block;
+	transition: all 0.3s;
+}
+
+.form__input:placeholder-shown + .form__label {
+	opacity: 0;
+	visibility: hidden;
+
+	transform: translateY(-3rem);
+}
+
+/* INPUT */
+.form__input {
+	border-top: 0;
+	border-left: 0;
+	border-right: 0;
+	border-bottom: 1px solid black;
+	outline: none;
+	width: 100% !important;
+
+	font-family: sans-serif;
+	font-size: 1.8rem;
+	padding: 0.2rem 0.5rem;
+	display: block;
+	margin-bottom: 1px;
+
+	transition: all 0.3s;
+}
+
+.form__input:focus {
+	outline: none;
+	/* 	box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.1); */
+	border-bottom: 2px solid #92bb71;
+	margin-bottom: 0;
+}
+.form__input:focus:invalid {
+	border-bottom: 2px solid #ff0000;
+}
+
+.form__input::-webkit-input-placeholder {
+	color: #999;
+}
+
+.date {
+	padding-bottom: 0;
+	padding-top: 0;
+}
+/* RADIO BUTTON */
+.radio-container {
+	display: flex;
+	justify-content: space-evenly;
+	align-items: center;
+}
+.radio {
+	font-family: Poppins;
+	font-size: 1.5rem;
+	text-transform: capitalize;
+	font-weight: 500;
+	display: inline-block;
+	vertical-align: center;
+	width: max-content;
+	position: relative;
+	padding-left: 3.5rem;
+	cursor: pointer;
+}
+.radio input[type='radio'] {
+	display: none;
+}
+.radio span {
+	height: 2rem;
+	width: 2rem;
+	border-radius: 50%;
+	border: 3px solid #333333;
+	display: block;
+	position: absolute;
+	top: 0;
+	left: 0.7rem;
+}
+.radio span::after {
+	content: '';
+	height: 8px;
+	width: 8px;
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	border-radius: 50%;
+	transform: translate(-50%, -50%) scale(0);
+	display: block;
+	background-color: #333;
+	transition: 300ms ease-in-out 0s;
+}
+
+.radio input[type='radio']:checked ~ span::after {
+	transform: translate(-50%, -50%) scale(1);
+}
+
+/*----- DEFAULT-STYLE-FOR-TEXT ----*/
+.heading-1 {
+	font-family: 'Poppins';
+	font-size: 4.5rem;
+}
+
+.heading-2 {
+	font-family: 'MADE Bon Voyage';
+	font-size: 2rem;
+	font-weight: 400;
+}
+
+/* BUTTON */
+
+.btn {
+	display: block;
+	width: 18rem;
+	height: 5rem;
+	border-radius: 50px;
+	border: 0;
+	outline: none;
+
+	font-family: Coolvetica;
+	color: white;
+	font-size: 2.5rem;
+	text-transform: uppercase;
+
+	box-shadow: 0 0 2rem rgba(20, 22, 24, 0.2);
+	cursor: pointer;
+
+	background: linear-gradient(to right bottom, hsla(194, 89%, 53%, 1) 30%, rgb(213, 248, 248) 100%);
+}
