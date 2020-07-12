@@ -70,8 +70,8 @@ header {
 }
 
 .form__label {
-	font-family: 'MADE Bon Voyage';
-	font-size: 1.2rem;
+	font-family: 'Playfair Display', serif;
+	font-size: 1.5rem;
 	margin-left: 0.5rem;
 	margin-top: 0.3rem;
 	display: block;
@@ -90,11 +90,11 @@ header {
 	border-top: 0;
 	border-left: 0;
 	border-right: 0;
-	border-bottom: 1px solid black;
+	border-bottom: 1px solid #333333;
 	outline: none;
 	width: 100% !important;
 
-	font-family: sans-serif;
+	font-family: 'Roboto', sans-serif;
 	font-size: 1.8rem;
 	padding: 0.2rem 0.5rem;
 	display: block;
@@ -128,10 +128,10 @@ header {
 	align-items: center;
 }
 .radio {
-	font-family: Poppins;
+	font-family: 'Poppins', sans-serif;
 	font-size: 1.5rem;
 	text-transform: capitalize;
-	font-weight: 500;
+	font-weight: 400;
 	display: inline-block;
 	vertical-align: center;
 	width: max-content;
@@ -172,12 +172,12 @@ header {
 
 /*----- DEFAULT-STYLE-FOR-TEXT ----*/
 .heading-1 {
-	font-family: 'Poppins';
+	font-family: 'Poppins', sans-serif;
 	font-size: 4.5rem;
 }
 
 .heading-2 {
-	font-family: 'MADE Bon Voyage';
+	font-family: 'Playfair Display', serif;
 	font-size: 2rem;
 	font-weight: 400;
 }
@@ -192,7 +192,8 @@ header {
 	border: 0;
 	outline: none;
 
-	font-family: Coolvetica;
+	font-family: 'Roboto', sans-serif;
+	font-weight: 900;
 	color: white;
 	font-size: 2.5rem;
 	text-transform: uppercase;
@@ -200,5 +201,5 @@ header {
 	box-shadow: 0 0 2rem rgba(20, 22, 24, 0.2);
 	cursor: pointer;
 
-	background: linear-gradient(to right bottom, hsla(194, 89%, 53%, 1) 30%, rgb(213, 248, 248) 100%);
+	background: linear-gradient(to bottom, #b67c80 0%, #1d3769 100%);
 }
