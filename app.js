@@ -1,6 +1,6 @@
 // DATA MODULE
 var dataModule = (function () {
-	var Male = function (id, firstName, lastName, email, address, mobile, birthday) {
+	var Male = function (id, firstName, lastName, email, address, mobile, birthday, age) {
 		this.id = id;
 		this.firstName = firstName;
 		this.lastName = lastName;
@@ -8,9 +8,10 @@ var dataModule = (function () {
 		this.address = address;
 		this.mobile = mobile;
 		this.birthday = birthday;
+		this.age = age;
 	};
 
-	var Female = function (id, firstName, lastName, email, address, mobile, birthday) {
+	var Female = function (id, firstName, lastName, email, address, mobile, birthday, age) {
 		this.id = id;
 		this.firstName = firstName;
 		this.lastName = lastName;
@@ -18,6 +19,7 @@ var dataModule = (function () {
 		this.address = address;
 		this.mobile = mobile;
 		this.birthday = birthday;
+		this.age = age;
 	};
 
 	// store the inputs
@@ -28,7 +30,7 @@ var dataModule = (function () {
 	};
 
 	return {
-		addMember: function (g, fn, ln, e, a, p, b) {
+		addMember: function (g, fn, ln, e, ad, p, b, ag) {
 			var newMember, ID;
 
 			if (data[g].length > 0) {
@@ -38,14 +40,30 @@ var dataModule = (function () {
 			}
 
 			if (g === 'male') {
-				newMember = new Male(ID, fn, ln, e, a, p, b);
+				newMember = new Male(ID, fn, ln, e, ad, p, b, ag);
 			} else if (g === 'female') {
-				newMember = new Female(ID, fn, ln, e, a, p, b);
+				newMember = new Female(ID, fn, ln, e, ad, p, b, ag);
 			}
 			data[g].push(newMember);
 
 			return newMember;
 		},
+
+		calcAge: function (Bday) {
+			var today, birthDate, age, m;
+
+			today = new Date();
+			birthDate = new Date(Bday);
+			age = today.getFullYear() - birthDate.getFullYear();
+			m = today.getMonth() - birthDate.getMonth();
+
+			if (m < 0 || (m === 0) & (today.getDate() < birthDate.getDate())) {
+				age = age - 1;
+			}
+
+			return age;
+		},
+
 		testing: function () {
 			console.log(data);
 		},
@@ -100,16 +118,17 @@ var UIModule = (function () {
 
 			if (gender === 'male') {
 				html =
-					'<div class="container male-container" id="member-%id%"><div class="hdr"><img src="/svg/icon-male.svg" alt="male-profile-icon" /><div class="description-container margin-right"><h3 class="heading-3">%firstName%<span class="span">%lastName%</span></h3></div></div><div class="first-container padding-for-container"><div class="age"><h5 class="heading-5">age</h5><h4 class="heading-4">17 years old</h4></div><div class="birthday"><h5 class="heading-5">birthday</h5><h4 class="heading-4">%birthday%</h4></div><div class="phone"><h5 class="heading-5">phone</h5><h4 class="heading-4">%phoneNumber%</h4></div></div><div class="second-container padding-for-container"><h5 class="heading-5">email</h5><h4 class="heading-4">%email%</h4></div><div class="third-container padding-for-container"><h5 class="heading-5">adress</h5><h4 class="heading-4">%address%</h4></div></div>';
+					'<div class="container male-container" id="member-%id%"><div class="hdr"><img src="/svg/icon-male.svg" alt="male-profile-icon" /><div class="description-container margin-right"><h3 class="heading-3">%firstName%<span class="span">%lastName%</span></h3></div></div><div class="first-container padding-for-container"><div class="age"><h5 class="heading-5">age</h5><h4 class="heading-4">%age% years old</h4></div><div class="birthday"><h5 class="heading-5">birthday</h5><h4 class="heading-4">%birthday%</h4></div><div class="phone"><h5 class="heading-5">phone</h5><h4 class="heading-4">%phoneNumber%</h4></div></div><div class="second-container padding-for-container"><h5 class="heading-5">email</h5><h4 class="heading-4">%email%</h4></div><div class="third-container padding-for-container"><h5 class="heading-5">adress</h5><h4 class="heading-4">%address%</h4></div></div>';
 			} else if (gender === 'female') {
 				html =
-					'<div class="container female-container id="member-%id%""><div class="hdr"><img src="/svg/icon-female.svg" alt="female-profile-icon" /><div class="description-container margin-right"><h3 class="heading-3">%firstName%<span class="span">%lastName%</span></h3></div></div><div class="first-container padding-for-container"><div class="age"><h5 class="heading-5">age</h5><h4 class="heading-4">17 years old</h4></div><div class="birthday"><h5 class="heading-5">birthday</h5><h4 class="heading-4">%birthday%</h4></div><div class="phone"><h5 class="heading-5">phone</h5><h4 class="heading-4">%phoneNumber%</h4></div></div><div class="second-container padding-for-container"><h5 class="heading-5">email</h5><h4 class="heading-4">%email%</h4></div><div class="third-container padding-for-container"><h5 class="heading-5">adress</h5><h4 class="heading-4">%address%</h4></div></div>';
+					'<div class="container female-container id="member-%id%""><div class="hdr"><img src="/svg/icon-female.svg" alt="female-profile-icon" /><div class="description-container margin-right"><h3 class="heading-3">%firstName%<span class="span">%lastName%</span></h3></div></div><div class="first-container padding-for-container"><div class="age"><h5 class="heading-5">age</h5><h4 class="heading-4">%age% years old</h4></div><div class="birthday"><h5 class="heading-5">birthday</h5><h4 class="heading-4">%birthday%</h4></div><div class="phone"><h5 class="heading-5">phone</h5><h4 class="heading-4">%phoneNumber%</h4></div></div><div class="second-container padding-for-container"><h5 class="heading-5">email</h5><h4 class="heading-4">%email%</h4></div><div class="third-container padding-for-container"><h5 class="heading-5">adress</h5><h4 class="heading-4">%address%</h4></div></div>';
 			}
 
 			newHTML = html.replace('%id%', obj.id);
-			newHTML = newhtml.replace('%firstName%', obj.firstName);
+			newHTML = newHTML.replace('%firstName%', obj.firstName);
 			newHTML = newHTML.replace('%lastName%', obj.lastName);
 			newHTML = newHTML.replace('%birthday%', obj.birthday);
+			newHTML = newHTML.replace('%age%', obj.age);
 			newHTML = newHTML.replace('%phoneNumber%', obj.mobile);
 			newHTML = newHTML.replace('%email%', obj.email);
 			newHTML = newHTML.replace('%address%', obj.address);
@@ -130,6 +149,15 @@ var controllerModule = (function (dataJS, uiJS) {
 				ctrlAddItem();
 			}
 		});
+	};
+
+	var calculateAge = function () {
+		input = uiJS.getInput();
+
+		// calculate the age
+		var age = dataModule.calcAge(input.birthday);
+		// display the age to the ui
+		return age;
 	};
 
 	// Main Function
@@ -155,12 +183,14 @@ var controllerModule = (function (dataJS, uiJS) {
 				input.email,
 				input.address,
 				input.phoneNumber,
-				input.birthday
+				input.birthday,
+				calculateAge()
 			);
 			// Add the memeber to the UI
 			uiJS.addMember(newMember, input.gender);
 			// testing
 			dataModule.testing();
+			//calc age
 		}
 	};
 
