@@ -2,7 +2,6 @@
 var dataModule = (function () {
 	var Male = function (id, firstName, lastName, email, address, mobile, birthday) {
 		this.id = id;
-
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.email = email;
@@ -64,6 +63,7 @@ var UIModule = (function () {
 		inputBirthday: '.add__birthday',
 		inputButton: '.add__button',
 		memberContainer: '.member-container',
+		sectionContainer: '.section',
 	};
 
 	function displayRadioValue() {
@@ -94,27 +94,20 @@ var UIModule = (function () {
 		getDOMString: function () {
 			return DOMstrings;
 		},
-
-		displayHeader: function () {
-			var header =
-				'<h1 class="heading-1 white" style="text-transform: uppercase; grid-column: full-start / full-end; margin: 0 auto; margin-bottom: 5rem;">NEW MEMBERS</h1>';
-
-			return document.querySelector('.section').insertAdjacentHTML('beforeend', header);
-		},
-
 		addMember: function (obj, gender) {
 			var html, newHTML, element, header;
 			element = DOMstrings.memberContainer;
 
 			if (gender === 'male') {
 				html =
-					'<div class="container male-container"><div class="hdr"><img src="/svg/icon-male.svg" alt="male-profile-icon" /><div class="description-container margin-right"><h3 class="heading-3">%firstName%<span class="span">%lastName%</span></h3></div></div><div class="first-container padding-for-container"><div class="age"><h5 class="heading-5">age</h5><h4 class="heading-4">17 years old</h4></div><div class="birthday"><h5 class="heading-5">birthday</h5><h4 class="heading-4">%birthday%</h4></div><div class="phone"><h5 class="heading-5">phone</h5><h4 class="heading-4">%phoneNumber%</h4></div></div><div class="second-container padding-for-container"><h5 class="heading-5">email</h5><h4 class="heading-4">%email%</h4></div><div class="third-container padding-for-container"><h5 class="heading-5">adress</h5><h4 class="heading-4">%address%</h4></div></div>';
+					'<div class="container male-container" id="member-%id%"><div class="hdr"><img src="/svg/icon-male.svg" alt="male-profile-icon" /><div class="description-container margin-right"><h3 class="heading-3">%firstName%<span class="span">%lastName%</span></h3></div></div><div class="first-container padding-for-container"><div class="age"><h5 class="heading-5">age</h5><h4 class="heading-4">17 years old</h4></div><div class="birthday"><h5 class="heading-5">birthday</h5><h4 class="heading-4">%birthday%</h4></div><div class="phone"><h5 class="heading-5">phone</h5><h4 class="heading-4">%phoneNumber%</h4></div></div><div class="second-container padding-for-container"><h5 class="heading-5">email</h5><h4 class="heading-4">%email%</h4></div><div class="third-container padding-for-container"><h5 class="heading-5">adress</h5><h4 class="heading-4">%address%</h4></div></div>';
 			} else if (gender === 'female') {
 				html =
-					'<div class="container female-container"><div class="hdr"><img src="/svg/icon-female.svg" alt="female-profile-icon" /><div class="description-container margin-right"><h3 class="heading-3">%firstName%<span class="span">%lastName%</span></h3></div></div><div class="first-container padding-for-container"><div class="age"><h5 class="heading-5">age</h5><h4 class="heading-4">17 years old</h4></div><div class="birthday"><h5 class="heading-5">birthday</h5><h4 class="heading-4">%birthday%</h4></div><div class="phone"><h5 class="heading-5">phone</h5><h4 class="heading-4">%phoneNumber%</h4></div></div><div class="second-container padding-for-container"><h5 class="heading-5">email</h5><h4 class="heading-4">%email%</h4></div><div class="third-container padding-for-container"><h5 class="heading-5">adress</h5><h4 class="heading-4">%address%</h4></div></div>';
+					'<div class="container female-container id="member-%id%""><div class="hdr"><img src="/svg/icon-female.svg" alt="female-profile-icon" /><div class="description-container margin-right"><h3 class="heading-3">%firstName%<span class="span">%lastName%</span></h3></div></div><div class="first-container padding-for-container"><div class="age"><h5 class="heading-5">age</h5><h4 class="heading-4">17 years old</h4></div><div class="birthday"><h5 class="heading-5">birthday</h5><h4 class="heading-4">%birthday%</h4></div><div class="phone"><h5 class="heading-5">phone</h5><h4 class="heading-4">%phoneNumber%</h4></div></div><div class="second-container padding-for-container"><h5 class="heading-5">email</h5><h4 class="heading-4">%email%</h4></div><div class="third-container padding-for-container"><h5 class="heading-5">adress</h5><h4 class="heading-4">%address%</h4></div></div>';
 			}
 
-			newHTML = html.replace('%firstName%', obj.firstName);
+			newHTML = html.replace('%id%', obj.id);
+			newHTML = newhtml.replace('%firstName%', obj.firstName);
 			newHTML = newHTML.replace('%lastName%', obj.lastName);
 			newHTML = newHTML.replace('%birthday%', obj.birthday);
 			newHTML = newHTML.replace('%phoneNumber%', obj.mobile);
