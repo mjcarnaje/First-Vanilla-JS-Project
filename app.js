@@ -1,57 +1,33 @@
-// DATA MODULE
-var dataModule = (function () {
-	var Male = function (id, firstName, lastName, email, address, mobile, birthday, age) {
-		this.id = id;
-		this.firstName = firstName;
-		this.lastName = lastName;
-		this.email = email;
-		this.address = address;
-		this.mobile = mobile;
-		this.birthday = birthday;
-		this.age = age;
-	};
+const dataModule = (function () {
+	class Person {
+		constructor(id, firstName, lastName, email, address, mobile, birthday, age) {
+			this.id = id;
+			this.firstName = firstName;
+			this.lastName = lastName;
+			this.email = email;
+			this.address = address;
+			this.mobile = mobile;
+			this.birthday = birthday;
+			this.age = age;
+		}
+	}
 
-	var Female = function (id, firstName, lastName, email, address, mobile, birthday, age) {
-		this.id = id;
-		this.firstName = firstName;
-		this.lastName = lastName;
-		this.email = email;
-		this.address = address;
-		this.mobile = mobile;
-		this.birthday = birthday;
-		this.age = age;
-	};
-
-	// store the inputs
-
-	var data = {
+	const data = {
 		male: [],
 		female: [],
 	};
 
 	return {
 		addMember: function (g, fn, ln, e, ad, p, b, ag) {
-			var newMember, ID;
-
-			if (data[g].length > 0) {
-				ID = data[g][data[g].length - 1].id + 1;
-			} else {
-				ID = 0;
-			}
-
-			if (g === 'male') {
-				newMember = new Male(ID, fn, ln, e, ad, p, b, ag);
-			} else if (g === 'female') {
-				newMember = new Female(ID, fn, ln, e, ad, p, b, ag);
-			}
+			let newMember, ID;
+			data[g].length ? (ID = data[g][data[g].length - 1].id + 1) : (ID = 0);
+			newMember = new Person(ID, fn, ln, e, ad, p, b, ag);
 			data[g].push(newMember);
-
 			return newMember;
 		},
 
 		calcAge: function (Bday) {
-			var today, birthDate, age, m;
-
+			let today, birthDate, age, m;
 			today = new Date();
 			birthDate = new Date(Bday);
 			age = today.getFullYear() - birthDate.getFullYear();
@@ -60,19 +36,17 @@ var dataModule = (function () {
 			if (m < 0 || (m === 0) & (today.getDate() < birthDate.getDate())) {
 				age = age - 1;
 			}
-
 			return age;
 		},
 
 		testing: function () {
-			console.log(data);
+			return data;
 		},
 	};
 })();
 
-// UI MODULE
-var UIModule = (function () {
-	var DOMstrings = {
+const UIModule = (function () {
+	let DOMstrings = {
 		inputFirstName: '.add__firstName',
 		inputLastName: '.add__lastName',
 		inputEmail: '.add__email',
@@ -85,15 +59,15 @@ var UIModule = (function () {
 	};
 
 	function displayRadioValue() {
-		var sex, ele;
+		let gender, ele;
 		ele = document.getElementsByName('gender');
 
-		for (i = 0; i < ele.length; i++) {
-			if (ele[i].checked) {
-				sex = ele[i].value;
+		for (gen of ele) {
+			if (gen.checked) {
+				gender = gen.value;
 			}
 		}
-		return sex;
+		return gender;
 	}
 
 	return {
@@ -112,16 +86,24 @@ var UIModule = (function () {
 		getDOMString: function () {
 			return DOMstrings;
 		},
+		addHeading: function () {
+			let header, element;
+			element = DOMstrings.memberContainer;
+			header =
+				'<h1 class="heading-1 white" style="text-transform: uppercase; grid-column: full-start / full-end; margin: 0 auto; margin-bottom: 5rem;">NEW MEMBERS</h1>';
+
+			document.querySelector(element).insertAdjacentHTML('beforebegin', header);
+		},
 		addMember: function (obj, gender) {
-			var html, newHTML, element, header;
+			let html, newHTML, element;
 			element = DOMstrings.memberContainer;
 
 			if (gender === 'male') {
 				html =
-					'<div class="container male-container" id="member-%id%"><div class="hdr"><img src="/svg/icon-male.svg" alt="male-profile-icon" /><div class="description-container margin-right"><h3 class="heading-3">%firstName%<span class="span">%lastName%</span></h3></div></div><div class="first-container padding-for-container"><div class="age"><h5 class="heading-5">age</h5><h4 class="heading-4">%age% years old</h4></div><div class="birthday"><h5 class="heading-5">birthday</h5><h4 class="heading-4">%birthday%</h4></div><div class="phone"><h5 class="heading-5">phone</h5><h4 class="heading-4">%phoneNumber%</h4></div></div><div class="second-container padding-for-container"><h5 class="heading-5">email</h5><h4 class="heading-4">%email%</h4></div><div class="third-container padding-for-container"><h5 class="heading-5">adress</h5><h4 class="heading-4">%address%</h4></div></div>';
+					'<div class="container male-container" id="member-%id%"><div class="hdr"><img src="/svg/icon-male.svg" alt="male-profile-icon" /><div class="description-container margin-right"><h3 class="heading-3">%firstName% <span class="span">%lastName%</span></h3></div></div><div class="first-container padding-for-container"><div class="age"><h5 class="heading-5">age</h5><h4 class="heading-4">%age% years old</h4></div><div class="birthday"><h5 class="heading-5">birthday</h5><h4 class="heading-4">%birthday%</h4></div><div class="phone"><h5 class="heading-5">phone</h5><h4 class="heading-4">%phoneNumber%</h4></div></div><div class="second-container padding-for-container"><h5 class="heading-5">email</h5><h4 class="heading-4">%email%</h4></div><div class="third-container padding-for-container"><h5 class="heading-5">adress</h5><h4 class="heading-4">%address%</h4></div></div>';
 			} else if (gender === 'female') {
 				html =
-					'<div class="container female-container id="member-%id%""><div class="hdr"><img src="/svg/icon-female.svg" alt="female-profile-icon" /><div class="description-container margin-right"><h3 class="heading-3">%firstName%<span class="span">%lastName%</span></h3></div></div><div class="first-container padding-for-container"><div class="age"><h5 class="heading-5">age</h5><h4 class="heading-4">%age% years old</h4></div><div class="birthday"><h5 class="heading-5">birthday</h5><h4 class="heading-4">%birthday%</h4></div><div class="phone"><h5 class="heading-5">phone</h5><h4 class="heading-4">%phoneNumber%</h4></div></div><div class="second-container padding-for-container"><h5 class="heading-5">email</h5><h4 class="heading-4">%email%</h4></div><div class="third-container padding-for-container"><h5 class="heading-5">adress</h5><h4 class="heading-4">%address%</h4></div></div>';
+					'<div class="container female-container id="member-%id%""><div class="hdr"><img src="/svg/icon-female.svg" alt="female-profile-icon" /><div class="description-container margin-right"><h3 class="heading-3">%firstName% <span class="span">%lastName%</span></h3></div></div><div class="first-container padding-for-container"><div class="age"><h5 class="heading-5">age</h5><h4 class="heading-4">%age% years old</h4></div><div class="birthday"><h5 class="heading-5">birthday</h5><h4 class="heading-4">%birthday%</h4></div><div class="phone"><h5 class="heading-5">phone</h5><h4 class="heading-4">%phoneNumber%</h4></div></div><div class="second-container padding-for-container"><h5 class="heading-5">email</h5><h4 class="heading-4">%email%</h4></div><div class="third-container padding-for-container"><h5 class="heading-5">adress</h5><h4 class="heading-4">%address%</h4></div></div>';
 			}
 
 			newHTML = html.replace('%id%', obj.id);
@@ -138,10 +120,10 @@ var UIModule = (function () {
 	};
 })();
 
-// CONTROLLER MODULE
-var controllerModule = (function (dataJS, uiJS) {
-	var setupEventListeners = function () {
-		var DOM = uiJS.getDOMString();
+const controllerModule = (function (dataJS, uiJS) {
+	let i = false;
+	const setupEventListeners = function () {
+		const DOM = uiJS.getDOMString();
 
 		document.querySelector(DOM.inputButton).addEventListener('click', ctrlAddItem);
 		document.addEventListener('keypress', function (e) {
@@ -151,19 +133,13 @@ var controllerModule = (function (dataJS, uiJS) {
 		});
 	};
 
-	var calculateAge = function () {
-		input = uiJS.getInput();
-
-		// calculate the age
-		var age = dataModule.calcAge(input.birthday);
-		// display the age to the ui
-		return age;
+	const calculateAge = function () {
+		let input = uiJS.getInput();
+		return dataModule.calcAge(input.birthday);
 	};
 
-	// Main Function
-	var ctrlAddItem = function () {
-		var input, newMember;
-		// get the inputs
+	const ctrlAddItem = function () {
+		let input, newMember;
 		input = uiJS.getInput();
 
 		if (
@@ -175,7 +151,6 @@ var controllerModule = (function (dataJS, uiJS) {
 			input.birthday !== '' &&
 			input.gender !== ''
 		) {
-			// add the input to the add member
 			newMember = dataModule.addMember(
 				input.gender,
 				input.firstName,
@@ -186,11 +161,11 @@ var controllerModule = (function (dataJS, uiJS) {
 				input.birthday,
 				calculateAge()
 			);
-			// Add the memeber to the UI
 			uiJS.addMember(newMember, input.gender);
-			// testing
-			dataModule.testing();
-			//calc age
+		}
+		if (i === false) {
+			uiJS.addHeading();
+			i = true;
 		}
 	};
 
